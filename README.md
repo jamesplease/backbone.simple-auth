@@ -1,4 +1,7 @@
 # backbone.simple-auth
+[![Travis build status](http://img.shields.io/travis/jmeas/backbone.simple-auth.svg?style=flat)](https://travis-ci.org/jmeas/backbone.simple-auth)
+[![Dependency Status](https://david-dm.org/jmeas/backbone.simple-auth.svg)](https://david-dm.org/jmeas/backbone.simple-auth) 
+[![devDependency Status](https://david-dm.org/jmeas/backbone.simple-auth/dev-status.svg)](https://david-dm.org/jmeas/backbone.simple-auth#info=devDependencies)
 
 A basic cookie-based client-side auth service for Backbone apps.
 
