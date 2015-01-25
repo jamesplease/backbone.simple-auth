@@ -1,6 +1,6 @@
 {
   "name": "backbone.simple-auth",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A basic cookie-based client-side auth service for Backbone apps.",
   "main": "dist/backbone.simple-auth.js",
   "scripts": {
