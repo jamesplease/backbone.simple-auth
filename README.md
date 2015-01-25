@@ -112,6 +112,18 @@ you've done that, and you can generate a token for authenticated users, then you
 cookie. Once that is done, call `auth.determineAuth()` to notify the `auth` model that the user is
 logged in.
 
+#### Is this library secure?
+
+It might seem strange that this library considers a user authenticated if there is **any** value stored
+in the cookie. As surprising as it may seem, this is not a security concern. The fact is that there is
+simply no way for the client to be certain that the user really is authenticated. At most, you can make
+an educated guess. The educated guess that we're making is that the user is unlikely to tamper with the
+cookies.
+
+These guesses are always checked against the API whenever sensitive data is requested. Consequently,
+even a user who does mess with the cookies will be unable to access any sensitive data. At most, they
+will see an empty UI interface.
+
 ### Contributing
 
 #### Unit tests
