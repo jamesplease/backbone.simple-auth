@@ -9,13 +9,15 @@ A basic cookie-based client-side auth service for Backbone apps.
 
 ### Motivation
 
-Some client-side applications stores tokens in cookies to manage authentication. They then
-send those tokens along with each request to the API. This library manages these two things
-for you.
+Some client-side apps need to send a token stored in a cookie along with each request to
+an API under the Authorization header. This library manages that for you.
+
+It also provides a central location for your app to determine if the user is authenticated
+or not.
 
 ### When should I use this library?
 
-- Your application returns user tokens in cookies
+- Your application stores authenticated user tokens in cookies
 - Your API follows the [Bearer Token spec](https://tools.ietf.org/html/rfc6750#section-2.1)
   for the Authorization header. Github's API
   [is an example](https://developer.github.com/v3/oauth/#use-the-access-token-to-access-the-api)
@@ -28,7 +30,7 @@ Other than Backbone (and `Backbone.$`), this library depends on
 
 ### Basic Usage
 
-Your server should be configured to set the authorization token as a cookie. When that
+Your server should be configured to set the authentication token as a cookie. When that
 happens, and your app loads...
 
 ```js
@@ -56,8 +58,8 @@ That's all there is to it.
 
 ### Attributes
 
-Auth is a Backbone Model. As such, you can use the same Model API that you're used to
-when interacting with it. There are three attributes on Auth:
+Auth is a Backbone Model. As such, you can use the Model API when interacting with it.
+There are three attributes on Auth:
 
 ##### `cookieName`
 
@@ -65,7 +67,7 @@ The name of the cookie to search for the token on. Defaults to `token`.
 
 ##### `authenticated`
 
-Whether or not the user is authenticated. Defaults to `false`.
+A boolean representing whether or not the user is authenticated. Defaults to `false`.
 
 ##### `token`
 
@@ -75,11 +77,11 @@ The value of the token. Defaults to `undefined`.
 
 ##### `determineAuth()`
 
-Looks for a cookie with the same name as `auth.get('cookieName')` to see if
-there's a token. If there is a token, then the user is set to be authorized.
+Searches for a cookie with the same name as `auth.get('cookieName')`. If it exists,
+then its value is assumed to be the token, and the user is set to be authorized.
 
 This is called when `auth` is first created. You may also wish to call it later if
-you have a system implemented to handle client-side authentication.
+your application allows for logging in on the client.
 
 If the cookie is found, the `authenticated` event is triggered.
 
@@ -93,20 +95,50 @@ triggered.
 
 ##### `authenticate`
 
-The user has logged in. Called when `auth` is first loaded. An object is passed along with the event
-containing the `token` and value of `authenticated`.
+The user has logged in. Called when `auth` is first loaded. The value of the `token` is passed
+as the first argument.
 
 ##### `logout`
 
-The user has been logged out. 
+The user has been logged out.
 
 ### FAQ
 
-#### How do I do log the user in from the client?
+#### How do I log the user in from the client?
 
 This library does not handle creation of cookies containing auth tokens, because there are so many
-ways to accomplish such a task. You will need to build your own system to generate the token, then
-set it as the cookie. Once that is done, call `auth.determineAuth()` to notify the `auth` model
-that the user is logged in.
+ways to accomplish such a task. You will need to build your own system to generate the token. Once
+you've done that, and you can generate a token for authenticated users, then you must set it as the
+cookie. Once that is done, call `auth.determineAuth()` to notify the `auth` model that the user is
+logged in.
 
+#### Is this library secure?
 
+It might seem strange that this library considers a user authenticated if there is **any** value stored
+in the cookie. As surprising as it may seem, this is not a security concern. The fact is that there is
+simply no way for the client to be certain that the user really is authenticated. At most, you can make
+an educated guess. Even a token that once authenticated the user could be remotely revoked at any time.
+
+In this light, assuming that the user is unlikely to tamper with cookies is a reasonable assumption
+to make.
+
+These assumptions are always checked against the API whenever sensitive data is requested. Consequently,
+even a user who does mess with the cookies, or otherwise has an invalid token, will be unable to access
+any sensitive data. At most, they will see an empty UI interface.
+
+### Contributing
+
+#### Unit tests
+
+**In Node**
+
+Run `gulp` to execute the test suite in Node.
+
+**In the browser**
+
+Run `gulp test:browser` to start a server. Then, navigate to `http://localhost:7777/test/runner.html` to run
+the suite.
+
+### Building the library
+
+`gulp build`
