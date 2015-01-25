@@ -1,14 +1,13 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(['underscore', 'moment'], factory);
+    define(['backbone'], factory);
   } else if (typeof exports !== 'undefined') {
-    var _ = require('underscore');
-    var moment = require('moment');
-    module.exports = factory(_, moment);
+    var Backbone = require('backbone');
+    module.exports = factory(Backbone);
   } else {
-    root.<%= exportVarName %> = factory(root._, root.moment);
+    root.<%= exportVarName %> = factory(root.Backbone);
   }
-})(this, function(_, moment) {
+})(this, function(Backbone) {
   'use strict';
 
   // @include ./backbone.simple-auth.js
