@@ -46,7 +46,7 @@ class SimpleAuth extends Backbone.Model {
     Backbone.$.ajaxSetup({
       beforeSend(jqXHR) {
         if (auth.get('authenticated')) {
-          jqXHR.setRequestHeader('Authorization', 'token ' + auth.get('token'));
+          jqXHR.setRequestHeader('Authorization', 'Bearer ' + auth.get('token'));
         }
         return true;
       }
