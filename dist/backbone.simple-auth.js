@@ -42,15 +42,15 @@ var _inherits = function (subClass, superClass) {
 
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["underscore", "moment"], factory);
+    define(["backbone", "cookies-js"], factory);
   } else if (typeof exports !== "undefined") {
-    var _ = require("underscore");
-    var moment = require("moment");
-    module.exports = factory(_, moment);
+    var Backbone = require("backbone");
+    var cookies = require("cookies-js");
+    module.exports = factory(Backbone, cookies);
   } else {
-    root.SimpleAuth = factory(root._, root.moment);
+    root.SimpleAuth = factory(root.Backbone, root.cookies);
   }
-})(this, function (_, moment) {
+})(this, function (Backbone, cookies) {
   "use strict";
 
   var SimpleAuth = (function (_Backbone$Model) {
@@ -120,7 +120,7 @@ var _inherits = function (subClass, superClass) {
           Backbone.$.ajaxSetup({
             beforeSend: function beforeSend(jqXHR) {
               if (auth.get("authenticated")) {
-                jqXHR.setRequestHeader("Authorization", "token " + auth.get("token"));
+                jqXHR.setRequestHeader("Authorization", "Bearer " + auth.get("token"));
               }
               return true;
             }
