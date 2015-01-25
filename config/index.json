@@ -1,0 +1,11 @@
+{
+  "destinationFolder": "dist",
+  "exportFileName": "backbone.simple-auth",
+  "entryFileName": "backbone.simple-auth",
+  "exportVarName": "SimpleAuth",
+  "mochaGlobals": [
+    "stub", "spy", "expect",
+    "SimpleAuth", "cookies",
+    "Backbone", "getCookie"
+  ]
+}
