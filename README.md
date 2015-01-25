@@ -9,7 +9,7 @@ A basic cookie-based client-side auth service for Backbone apps.
 
 ### Motivation
 
-Some client-side apps wish to send a token, stored in a cookie, along with each request to
+Some client-side apps need to send a token stored in a cookie along with each request to
 an API under the Authorization header. This library manages that for you.
 
 It also provides a central location for your app to determine if the user is authenticated
@@ -117,12 +117,14 @@ logged in.
 It might seem strange that this library considers a user authenticated if there is **any** value stored
 in the cookie. As surprising as it may seem, this is not a security concern. The fact is that there is
 simply no way for the client to be certain that the user really is authenticated. At most, you can make
-an educated guess. The educated guess that we're making is that the user is unlikely to tamper with the
-cookies.
+an educated guess. Even a token that once authenticated the user could be remotely revoked at any time.
 
-These guesses are always checked against the API whenever sensitive data is requested. Consequently,
-even a user who does mess with the cookies will be unable to access any sensitive data. At most, they
-will see an empty UI interface.
+In this light, assuming that the user is unlikely to tamper with cookies is a reasonable assumption
+to make.
+
+These assumptions are always checked against the API whenever sensitive data is requested. Consequently,
+even a user who does mess with the cookies, or otherwise has an invalid token, will be unable to access
+any sensitive data. At most, they will see an empty UI interface.
 
 ### Contributing
 
@@ -134,8 +136,8 @@ Run `gulp` to execute the test suite in Node.
 
 **In the browser**
 
-Run `gulp test:browser` to start a server for testing in the browser. Once you've
-done that, navigate to `http://localhost:7777/test/runner.html`.
+Run `gulp test:browser` to start a server. Then, navigate to `http://localhost:7777/test/runner.html` to run
+the suite.
 
 ### Building the library
 
