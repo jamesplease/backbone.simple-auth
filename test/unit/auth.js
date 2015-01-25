@@ -186,7 +186,7 @@ describe('Backbone.SimpleAuth', function() {
         });
 
         it('should not set the Authorization header', function() {
-          expect(this.requests[0].requestHeaders.Authorization).to.equal('token asdf');
+          expect(this.requests[0].requestHeaders.Authorization).to.equal('Bearer asdf');
         });
       });
     });

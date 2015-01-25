@@ -1,13 +1,14 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(['backbone'], factory);
+    define(['backbone', 'cookies-js'], factory);
   } else if (typeof exports !== 'undefined') {
     var Backbone = require('backbone');
-    module.exports = factory(Backbone);
+    var cookies = require('cookies-js');
+    module.exports = factory(Backbone, cookies);
   } else {
-    root.<%= exportVarName %> = factory(root.Backbone);
+    root.<%= exportVarName %> = factory(root.Backbone, root.cookies);
   }
-})(this, function(Backbone) {
+})(this, function(Backbone, cookies) {
   'use strict';
 
   // @include ./backbone.simple-auth.js
