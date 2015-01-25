@@ -149,47 +149,45 @@ describe('Backbone.SimpleAuth', function() {
       });
     });
 
-    describe('when not logged in and making an AJAX request', function() {
+    describe('when making AJAX requests', function() {
       beforeEach(function() {
         this.xhr = sinon.useFakeXMLHttpRequest();
         var requests = this.requests = [];
         this.xhr.onCreate = function (xhr) {
           requests.push(xhr);
         };
-        this.auth = new SimpleAuth();
-        Backbone.$.get('https://www.google.com');
-        
       });
 
       afterEach(function() {
         this.xhr.restore();
       });
 
-      it('should not set the Authorization header', function() {
-        expect(this.requests[0].requestHeaders.Authorization).to.be.undefined;
-      });
-    });
 
-    describe('when logged in and making an AJAX request', function() {
-      beforeEach(function() {
-        this.xhr = sinon.useFakeXMLHttpRequest();
-        var requests = this.requests = [];
-        this.xhr.onCreate = function (xhr) {
-          requests.push(xhr);
-        };
-        cookies.set('token', 'asdf');
-        this.auth = new SimpleAuth();
-        Backbone.$.get('https://www.google.com');
-        
+      describe('and not authenticated', function() {
+        beforeEach(function() {
+          this.auth = new SimpleAuth();
+          Backbone.$.get('https://www.google.com');
+        });
+
+        it('should not set the Authorization header', function() {
+          expect(this.requests[0].requestHeaders.Authorization).to.be.undefined;
+        });
       });
 
-      afterEach(function() {
-        this.xhr.restore();
-        cookies.expire('token');
-      });
+      describe('and authenticated', function() {
+        beforeEach(function() {
+          cookies.set('token', 'asdf');
+          this.auth = new SimpleAuth();
+          Backbone.$.get('https://www.google.com');
+        });
 
-      it('should not set the Authorization header', function() {
-        expect(this.requests[0].requestHeaders.Authorization).to.equal('token asdf');
+        afterEach(function() {
+          cookies.expire('token');
+        });
+
+        it('should not set the Authorization header', function() {
+          expect(this.requests[0].requestHeaders.Authorization).to.equal('token asdf');
+        });
       });
     });
   });
