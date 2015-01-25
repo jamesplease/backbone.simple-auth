@@ -1,5 +1,7 @@
 # backbone.simple-auth
 [![Travis build status](http://img.shields.io/travis/jmeas/backbone.simple-auth.svg?style=flat)](https://travis-ci.org/jmeas/backbone.simple-auth)
+[![Code Climate](https://codeclimate.com/github/jmeas/backbone.simple-auth/badges/gpa.svg)](https://codeclimate.com/github/jmeas/backbone.simple-auth)
+[![Test Coverage](https://codeclimate.com/github/jmeas/backbone.simple-auth/badges/coverage.svg)](https://codeclimate.com/github/jmeas/backbone.simple-auth)
 [![Dependency Status](https://david-dm.org/jmeas/backbone.simple-auth.svg)](https://david-dm.org/jmeas/backbone.simple-auth) 
 [![devDependency Status](https://david-dm.org/jmeas/backbone.simple-auth/dev-status.svg)](https://david-dm.org/jmeas/backbone.simple-auth#info=devDependencies)
 
