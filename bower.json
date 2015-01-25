@@ -1,0 +1,31 @@
+{
+  "name": "backbone.simple-auth",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jmeas/backbone.simple-auth",
+  "authors": [
+    "Jmeas <jellyes2@gmail.com>"
+  ],
+  "description": "A basic cookie-based client-side auth service for Backbone apps.",
+  "main": "dist/backbone.simple-auth.js",
+  "keywords": [
+    "backbone",
+    "auth",
+    "authorization",
+    "authentication",
+    "cookies",
+    "cookie",
+    "token"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "cookies-js": "~1.1.0"
+  }
+}
