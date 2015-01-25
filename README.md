@@ -98,7 +98,7 @@ containing the `token` and value of `authenticated`.
 
 ##### `logout`
 
-The user has been logged out. 
+The user has been logged out.
 
 ### FAQ
 
@@ -109,4 +109,19 @@ ways to accomplish such a task. You will need to build your own system to genera
 set it as the cookie. Once that is done, call `auth.determineAuth()` to notify the `auth` model
 that the user is logged in.
 
+### Contributing
 
+#### Unit tests
+
+**In Node**
+
+Run `gulp` to execute the test suite in Node.
+
+**In the browser**
+
+Run `gulp test:browser` to start a server for testing in the browser. Once you've
+done that, navigate to `http://localhost:7777/test/runner.html`.
+
+### Building the library
+
+`gulp build`
