@@ -1,55 +1,11 @@
-var _prototypeProperties = function (child, staticProps, instanceProps) {
-  if (staticProps) Object.defineProperties(child, staticProps);
-  if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
-};
+var _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
 
-var _get = function get(object, property, receiver) {
-  var desc = Object.getOwnPropertyDescriptor(object, property);
+var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-  if (desc === undefined) {
-    var parent = Object.getPrototypeOf(object);
+var _inherits = function (subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
-    if (parent === null) {
-      return undefined;
-    } else {
-      return get(parent, property, receiver);
-    }
-  } else if ("value" in desc && desc.writable) {
-    return desc.value;
-  } else {
-    var getter = desc.get;
-    if (getter === undefined) {
-      return undefined;
-    }
-    return getter.call(receiver);
-  }
-};
-
-var _inherits = function (subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) subClass.__proto__ = superClass;
-};
-
-(function (root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(["backbone", "cookies-js"], factory);
-  } else if (typeof exports !== "undefined") {
-    var Backbone = require("backbone");
-    var cookies = require("cookies-js");
-    module.exports = factory(Backbone, cookies);
-  } else {
-    root.SimpleAuth = factory(root.Backbone, root.cookies);
-  }
+(function (global, factory) {
+  typeof exports === "object" && typeof module !== "undefined" ? module.exports = factory(require("backbone"), require("cookies-js")) : typeof define === "function" && define.amd ? define(["backbone", "cookies-js"], factory) : global.SimpleAuth = factory(global.Backbone, global.cookies);
 })(this, function (Backbone, cookies) {
   "use strict";
 
@@ -71,7 +27,6 @@ var _inherits = function (subClass, superClass) {
             authenticated: false
           };
         },
-        enumerable: true,
         configurable: true
       },
       determineAuth: {
@@ -94,7 +49,6 @@ var _inherits = function (subClass, superClass) {
           this.trigger("authenticate", this.get("token"));
         },
         writable: true,
-        enumerable: true,
         configurable: true
       },
       logout: {
@@ -109,13 +63,12 @@ var _inherits = function (subClass, superClass) {
           this.trigger("logout");
         },
         writable: true,
-        enumerable: true,
         configurable: true
       },
       _configureAjax: {
 
         // Include our token in every request
-        value: function ConfigureAjax() {
+        value: function _configureAjax() {
           var auth = this;
           Backbone.$.ajaxSetup({
             beforeSend: function beforeSend(jqXHR) {
@@ -127,7 +80,6 @@ var _inherits = function (subClass, superClass) {
           });
         },
         writable: true,
-        enumerable: true,
         configurable: true
       }
     });
@@ -135,11 +87,8 @@ var _inherits = function (subClass, superClass) {
     return SimpleAuth;
   })(Backbone.Model);
 
+  var backbone_simple_auth = SimpleAuth;
 
-
-
-  Backbone.Auth = SimpleAuth;
-
-  return SimpleAuth;
+  return backbone_simple_auth;
 });
-//# sourceMappingURL=backbone.simple-auth.js.map
+//# sourceMappingURL=./backbone.simple-auth.js.map
